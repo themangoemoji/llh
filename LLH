@@ -1,5 +1,8 @@
 #!/bin/bash
 
-read -p "Input URL or LLH: " userin
+read -p "Input URL or existing LLH: " userin
 ./a.out $userin > out.txt
 cat out.txt | pbcopy
+echo -ne "\n'$userin' --> "
+cat out.txt
+echo "Value copied to clipboard."

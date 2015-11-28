@@ -119,23 +119,22 @@ int main ( int argc, char *argv[] ) {
       break;
     }
 
-    // Check to see if we can deliver the LL from URL
+    // Deliver an existing URL from shorthash
     if (ll_to_url_hash[user_in] != "") {
       cout << ll_to_url_hash[user_in] << endl;
     }
 
-    // Get new alpha string for each url if not already present
+    // Deliver an existing shorthash code from URL
+    else if (url_to_ll_hash[user_in] != "") {
+      cout << url_to_ll_hash[user_in] << endl;
+    }
+
+    // Add unfarmiliar URL (ideally) to hashmaps, increment unique hash num
     else if (url_to_ll_hash[user_in] == "") {
-      cout << "URL TO LLH --> " << url_to_ll_hash[user_in] << endl;
-      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[user_in]] << endl;
+      cout << url_to_ll_hash[user_in] << endl;
       url_to_ll_hash[user_in] = numToLL(global_hash_num);
       ll_to_url_hash[url_to_ll_hash[user_in]] = user_in;
-      cout << numToLL(++global_hash_num) << endl;
-    }
-    else {
-      cout << "URL TO LLH --> " << url_to_ll_hash[user_in] << endl;
-      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[user_in]] << endl;
-      cout << user_in << endl;
+      ++global_hash_num;
     }
     user_in = "q";
   }
