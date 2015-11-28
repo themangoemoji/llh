@@ -44,14 +44,12 @@ int WritePersistentHashMaps(string &filename, map<string, string> *hashmap) {
 void ReadGlobalHashNum(string &filename, int& hash_num) {
   ifstream i(filename, ios::binary);
   i.read((char*)&hash_num, sizeof(hash_num));
-  cout << "GLOBAL HASH AT READ: " << hash_num << endl;
 }
 
 void WritePersistentHashNum(string &filename, int& hash_num) {
     ofstream o(filename,ios::binary);
     o.write((char*)&hash_num, sizeof(hash_num));
     o.close();
-  cout << "GLOBAL HASH AT WRITE: " << hash_num << endl;
 }
 
 int ReadPersistentHashMaps(string &fname, map<string, string> *m) {
@@ -96,14 +94,14 @@ int ReadPersistentHashMaps(string &fname, map<string, string> *m) {
 }
 
 
-int main() {
+int main ( int argc, char *argv[] ) {
   // Open persistent hash number to increment string val
   string PERSISTENT_HASH_NUM = "hash_num.txt";
   string PERSISTENT_URLS = "persistent_urls.txt";
   string PERSISTENT_LL = "persistent_lls.txt";
   map<string, string> url_to_ll_hash;
   map<string, string> ll_to_url_hash;
-  string url = "";
+  string user_in = argv[1];
   int global_hash_num;
 
   // Open the persistent hash number
@@ -115,25 +113,31 @@ int main() {
 
   // Loop user input unitl quit is directed
   while (1) {
-    cout << "URL to hash: ";
-    cin >> url;
     // Check user input to end program
-    if (url == "q" || url == "Q") {
+    //cin >> user_in;
+    if (user_in == "q" || user_in == "Q") {
       break;
     }
+
+    // Check to see if we can deliver the LL from URL
+    if (ll_to_url_hash[user_in] != "") {
+      cout << ll_to_url_hash[user_in] << endl;
+    }
+
     // Get new alpha string for each url if not already present
-    if (url_to_ll_hash[url] == "") {
-      cout << "URL TO LLH --> " << url_to_ll_hash[url] << endl;
-      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[url]] << endl;
-      url_to_ll_hash[url] = numToLL(global_hash_num);
-      ll_to_url_hash[url_to_ll_hash[url]] = url;
+    else if (url_to_ll_hash[user_in] == "") {
+      cout << "URL TO LLH --> " << url_to_ll_hash[user_in] << endl;
+      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[user_in]] << endl;
+      url_to_ll_hash[user_in] = numToLL(global_hash_num);
+      ll_to_url_hash[url_to_ll_hash[user_in]] = user_in;
       cout << numToLL(++global_hash_num) << endl;
     }
     else {
-      cout << "URL TO LLH --> " << url_to_ll_hash[url] << endl;
-      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[url]] << endl;
-      cout << url << endl;
+      cout << "URL TO LLH --> " << url_to_ll_hash[user_in] << endl;
+      cout << "LLH TO URL --> " << ll_to_url_hash[url_to_ll_hash[user_in]] << endl;
+      cout << user_in << endl;
     }
+    user_in = "q";
   }
 
   // Write the hash num and maps so that they are persistent through next run

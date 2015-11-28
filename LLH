@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -p "Input URL or LLH: " userin
+./a.out $userin > out.txt
+cat out.txt | pbcopy
