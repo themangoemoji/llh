@@ -131,9 +131,9 @@ int main ( int argc, char *argv[] ) {
 
     // Add unfarmiliar URL (ideally) to hashmaps, increment unique hash num
     else if (url_to_ll_hash[user_in] == "") {
-      cout << url_to_ll_hash[user_in] << endl;
       url_to_ll_hash[user_in] = numToLL(global_hash_num);
       ll_to_url_hash[url_to_ll_hash[user_in]] = user_in;
+      cout << url_to_ll_hash[user_in] << endl;
       ++global_hash_num;
     }
     user_in = "q";
