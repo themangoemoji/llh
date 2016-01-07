@@ -1,4 +1,5 @@
 #!/bin/bash
+g++ std=c++11 ~/dev/LLH/llh.cpp
 
 read -p "Input URL or existing LLH: " userin
 ./a.out $userin > out.txt

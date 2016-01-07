@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LLH</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="clearButton">clear</string>
+    <string name="enterText">Enter Shortlink Or URL</string>
+    <string name="browserText">Open In Browser</string>
+    <string name="paste">Paste URL</string>
+    <string name="paste_success">value copied from clipboard</string>
+</resources>
